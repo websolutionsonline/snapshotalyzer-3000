@@ -24,6 +24,11 @@ def has_pending_snapshot(volume):
     snapshots = list(volume.snapshots.all())
     return snapshots and snapshots[0].state == 'pending'
 
+def can_execute_command(project, force):
+    if not project and not force:
+        return False
+    return True
+
 @click.group()
 
 def cli():
