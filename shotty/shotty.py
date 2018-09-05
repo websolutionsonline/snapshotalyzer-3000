@@ -34,7 +34,7 @@ def snapshots():
     help="Only snapshots for project (tag Project:<name>)")
 
 # functions
-def list_instances(project):
+def list_snapshots(project):
     "List EC2 snapshots"
 
     instances = filter_instances(project)
@@ -60,7 +60,7 @@ def volumes():
     help="Only volumes for project (tag Project:<name>)")
 
 # functions
-def list_instances(project):
+def list_volumes(project):
     "List EC2 volumes"
 
     instances = filter_instances(project)
