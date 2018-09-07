@@ -7,9 +7,8 @@ import click
 #noun (i.e. the description of the thing) then verb (i.e. the doing word)
 # e.g. shotty_instances_stop
 
+
 #global vars
-session = boto3.Session(profile_name='shotty')
-ec2 = session.resource('ec2')
 
 def filter_instances(project):
     instances = []
@@ -30,13 +29,21 @@ def can_execute_command(project, force):
     return True
 
 @click.group()
+@click.option('--profile', default='shotty',
+    help="Optional profile name. Default will be shotty.")
 
-def cli():
+def cli(profile):
     """Shotty manages snapshots"""
+    print("Setting up boto3 session with profile name: {0}...".format(profile))
+    global session
+    global ec2
 
-
-
-
+    try:
+        session = boto3.Session(profile_name=profile)
+        ec2 = session.resource('ec2')
+    except botocore.exceptions.ProfileNotFound as e:
+        print(e)
+        exit(1)
 
 # what is called when the script is run 'standalone'
 if __name__ == '__main__':

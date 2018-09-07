@@ -132,4 +132,13 @@ def reboot_instances(project, force):
             i.reboot()
         except botocore.exceptions.ClientError as e:
             print(" Could not reboot {0}. ".format(i.id) + str(e))
-            raise
+
+    return
+
+
+
+#except botocore.exceptions.ClientError as e:
+#        code = e.response['Error']['Code']
+#        message = e.response['Error']['Message']
+#        if code == 'IncorrectState':
+#            print('retry')
